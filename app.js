@@ -22,7 +22,6 @@ const app = {
     this.flicks.unshift(flick)
 
     const listItem = this.renderListItem(flick)
-    // this.list.appendChild(listItem)
     this.list
       .insertBefore(listItem, this.list.firstChild)
 
@@ -38,7 +37,16 @@ const app = {
       .querySelector('.flick-name')
       .textContent = flick.name
 
+    item
+      .querySelector('button.remove')
+      .addEventListener('click', this.removeFlick)
+
     return item
+  },
+
+  removeFlick(ev) {
+    const listItem = ev.target.closest('.flick')
+    listItem.remove()
   },
 }
 

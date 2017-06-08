@@ -22,6 +22,7 @@ const app = {
     // TODO: Add flick to this.flicks
 
     ++ this.max
+    f.reset()
   },
 
   renderListItem(flick) {

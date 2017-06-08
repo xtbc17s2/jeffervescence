@@ -15,4 +15,4 @@
 
 ### Super Mega Bonus Credit Hyper Fighting
 
-* Persist the flicks/dinosaurs data using `window.localstorage`.  The flicks/dinosaurs should stay in the list even when the page is refreshed.
+* Persist the flicks/dinosaurs data using `window.localStorage`.  The flicks/dinosaurs should stay in the list even when the page is refreshed.

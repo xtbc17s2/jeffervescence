@@ -71,6 +71,10 @@ const app = {
     }
 
     item
+      .querySelector('.flick-name')
+      .addEventListener('keypress', this.saveOnEnter.bind(this, flick))
+
+    item
       .querySelector('button.remove')
       .addEventListener('click', this.removeFlick.bind(this))
     item
@@ -154,9 +158,10 @@ const app = {
   },
 
   edit(flick, ev) {
-    const btn = ev.currentTarget
-    const listItem = btn.closest('.flick')
+    const listItem = ev.target.closest('.flick')
     const nameField = listItem.querySelector('.flick-name')
+    const btn = listItem.querySelector('.edit.button')
+
     const icon = btn.querySelector('i.fa')
 
     if (nameField.isContentEditable) {
@@ -177,6 +182,12 @@ const app = {
       btn.classList.add('success')
     }
   },
+
+  saveOnEnter(flick, ev) {
+    if (ev.key === 'Enter') {
+      this.edit(flick, ev)
+    }
+  }
 }
 
 app.init({

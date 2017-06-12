@@ -1,3 +1,23 @@
 .template {
   visibility: hidden;
 }
+
+.flick {
+  border: 1px solid #ddd;
+  clear: both;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+}
+
+.flick + .flick {
+  border-top: 0;
+}
+
+.flick-name {
+  flex-grow: 1;
+}
+
+.actions.button-group {
+  margin-bottom: 0;
+}

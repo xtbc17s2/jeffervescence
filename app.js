@@ -67,6 +67,9 @@ class App {
     item
       .querySelector('.flick-name')
       .textContent = flick.name
+    item
+      .querySelector('.flick-name')
+      .setAttribute('title', flick.name)
 
     if (flick.fav) {
       item.classList.add('fav')

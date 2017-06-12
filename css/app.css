@@ -17,10 +17,20 @@
 
 .flick-name {
   flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: calc(100% - 200px);
+  margin-right: 1rem;
 }
 
 .actions.button-group {
   margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.actions .button {
+  padding: .65em 0.8em;
 }
 
 .flick.fav {

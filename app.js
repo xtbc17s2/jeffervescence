@@ -44,6 +44,7 @@ const app = {
     const flick = {
       id: this.max + 1,
       name: f.flickName.value,
+      fav: false,
     }
 
     this.addFlick(flick)
@@ -65,9 +66,16 @@ const app = {
       .querySelector('.flick-name')
       .textContent = flick.name
 
+    if (flick.fav) {
+      item.classList.add('fav')
+    }
+
     item
       .querySelector('button.remove')
       .addEventListener('click', this.removeFlick.bind(this))
+    item
+      .querySelector('button.fav')
+      .addEventListener('click', this.favFlick.bind(this, flick))
 
     return item
   },
@@ -87,6 +95,20 @@ const app = {
     listItem.remove()
     this.save()
   },
+
+  favFlick(flick, ev) {
+    console.log(arguments)
+    const listItem = ev.target.closest('.flick')
+    flick.fav = !flick.fav
+
+    if (flick.fav) {
+      listItem.classList.add('fav')
+    } else {
+      listItem.classList.remove('fav')
+    }
+    
+    this.save()
+  }
 }
 
 app.init({

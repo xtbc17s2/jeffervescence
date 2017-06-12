@@ -1,5 +1,5 @@
-.template {
-  visibility: hidden;
+.flick.template {
+  display: none;
 }
 
 .flick {
@@ -26,4 +26,10 @@
 .flick.fav {
   background-color: #ffa807;
   border-color: #ffc656;
+}
+
+.flick:first-child button.move-up {
+  background-color: #ddd;
+  color: #eee;
+  cursor: not-allowed;
 }

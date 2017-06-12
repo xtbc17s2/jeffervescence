@@ -76,7 +76,9 @@ const app = {
     item
       .querySelector('button.fav')
       .addEventListener('click', this.favFlick.bind(this, flick))
-
+    item
+      .querySelector('button.move-up')
+      .addEventListener('click', this.moveUp.bind(this, flick))
     return item
   },
 
@@ -97,7 +99,6 @@ const app = {
   },
 
   favFlick(flick, ev) {
-    console.log(arguments)
     const listItem = ev.target.closest('.flick')
     flick.fav = !flick.fav
 
@@ -108,6 +109,23 @@ const app = {
     }
     
     this.save()
+  },
+
+  moveUp(flick, ev) {
+    const listItem = ev.target.closest('.flick')
+
+    const index = this.flicks.findIndex((currentFlick, i) => {
+      return currentFlick.id === flick.id
+    })
+
+    if (index > 0) {
+      this.list.insertBefore(listItem, listItem.previousElementSibling)
+
+      const previousFlick = this.flicks[index - 1]
+      this.flicks[index - 1] = flick
+      this.flicks[index] = previousFlick
+      this.save()
+    }
   }
 }
 

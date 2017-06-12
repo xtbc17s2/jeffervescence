@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
     <div class="row">
@@ -28,7 +29,10 @@
                 class="success button"
                 type="submit"
               >
-                Add flick
+                <i
+                  class="fa fa-plus"
+                  aria-hidden="true"
+                ></i>
               </button>
             </div>
           </div>
@@ -42,8 +46,18 @@
           <li class="flick template">
             <span class="flick-name"></span>
             <span class="actions button-group">
-              <button class="fav button">Fav</button>
-              <button class="remove button alert">Remove</button>
+              <button class="fav button">
+                <i
+                  class="fa fa-star"
+                  aria-hidden="true"
+                ></i>
+              </button>
+              <button class="remove button alert">
+                <i
+                  class="fa fa-trash-o"
+                  aria-hidden="true"
+                ></i>
+              </button>
             </span>
           </li>
         </ul>

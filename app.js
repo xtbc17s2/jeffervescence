@@ -79,6 +79,10 @@ const app = {
     item
       .querySelector('button.move-up')
       .addEventListener('click', this.moveUp.bind(this, flick))
+    item
+      .querySelector('button.move-down')
+      .addEventListener('click', this.moveDown.bind(this, flick))
+
     return item
   },
 
@@ -126,7 +130,24 @@ const app = {
       this.flicks[index] = previousFlick
       this.save()
     }
-  }
+  },
+
+  moveDown(flick, ev) {
+    const listItem = ev.target.closest('.flick')
+
+    const index = this.flicks.findIndex((currentFlick, i) => {
+      return currentFlick.id === flick.id
+    })
+
+    if (index < this.flicks.length - 1) {
+      this.list.insertBefore(listItem.nextElementSibling, listItem)
+      
+      const nextFlick = this.flicks[index + 1]
+      this.flicks[index + 1] = flick
+      this.flicks[index] =  nextFlick
+      this.save()
+    }
+  },
 }
 
 app.init({

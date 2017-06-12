@@ -28,7 +28,8 @@
   border-color: #ffc656;
 }
 
-.flick:first-child button.move-up {
+.flick:first-child button.move-up,
+.flick:last-child button.move-down {
   background-color: #ddd;
   color: #eee;
   cursor: not-allowed;

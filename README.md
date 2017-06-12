@@ -41,7 +41,7 @@ Or heck, just make separate lists based on the second input field you added in t
 
 ### Super Mega Bonus Credit
 
-Add a search field, and only show the results that match the search criteria. It's not as hard as it may sound. Here are some things you may wish to use while implementing this:
+Add a search field, and only show the results that match the search criteria. Here are some things you may wish to use while implementing search:
 
 * [`Array.prototype.find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find?v=control) (very similar to `findIndex()`)
 * [`HTMLElement.dataset`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) (remember those IDs we stored?)

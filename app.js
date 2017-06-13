@@ -29,7 +29,7 @@ class App {
   }
 
   search(ev) {
-    const q = ev.currentTarget.value.toLowerCase()
+    const q = ev.currentTarget.value
     const prevMatches = Array.from(document.querySelectorAll('.flick-name strong'))
     this.removeElements(prevMatches)
 

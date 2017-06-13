@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+h1 {
+  font-family: 'Abril Fatface', cursive;
+  text-transform: lowercase;
+}
+
+h1 span {
+  color: #1779ba;
+}
+
 ul.flick-list {
   margin: 0;
 }

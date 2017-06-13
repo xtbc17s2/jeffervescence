@@ -15,18 +15,27 @@
       <div class="medium-8 medium-offset-2 column">
         <h1>Jeffervescence</h1>
         <form id="flick-form">
-          <div class="input-group">
-            <input
-              type="text"
-              class="input-group-field"
-              name="flickName"
-              placeholder="Name a flick"
-              autofocus
-              required
-            >
-            <div class="input-group-button">
+          <div class="row">
+            <div class="small-5 column">
+              <input
+                type="text"
+                name="flickName"
+                placeholder="Name a flick"
+                autofocus
+                required
+              >
+            </div>
+            <div class="small-4 column">
+              <select name="genre" required>
+                <option value="">-- Genre --</option>
+                <option value="comedy">Comedy</option>
+                <option value="comedy">Drama</option>
+                <option value="sci-fi">Sci-Fi</option>
+              </select>
+            </div>
+            <div class="small-3 column">
               <button 
-                class="success button"
+                class="success button expanded"
                 type="submit"
               >
                 <i

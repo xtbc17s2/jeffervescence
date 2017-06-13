@@ -47,11 +47,13 @@ class App {
       id: this.max + 1,
       name: f.flickName.value,
       fav: false,
+      genre: ev.target.genre.value,
     }
 
     this.addFlick(flick)
 
     f.reset()
+    ev.target.flickName.focus()
   }
 
   save() {

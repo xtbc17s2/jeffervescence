@@ -35,9 +35,9 @@ class App {
 
     Array.from(document.querySelectorAll('.flick')).map(listItem => {
       const nameField = listItem.querySelector('.flick-name')
-      if (nameField.textContent.toLowerCase().includes(q)) {
+      const pattern = new RegExp(q, 'gi')
+      if (nameField.textContent.match(pattern)) {
         listItem.classList.remove('hide')
-        const pattern = new RegExp(q, 'gi')
         nameField.innerHTML = nameField.innerHTML.replace(pattern, '<strong>$&</strong>')
       } else {
         listItem.classList.add('hide')

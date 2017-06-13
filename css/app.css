@@ -59,3 +59,20 @@ ul.flick-list {
 #genres {
   position: relative;
 }
+
+li.search {
+  position: absolute;
+  right: 0;
+  padding-top: 0.4rem;
+  padding-right: 1rem;
+  width: 40%;
+}
+li.search input {
+  margin: 0;
+}
+li.search .input-group-label {
+  color: #999;
+}
+li.search .input-group {
+  margin: 0;
+}

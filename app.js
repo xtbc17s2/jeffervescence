@@ -6,10 +6,7 @@ class App {
     this.template = document
       .querySelector(selectors.templateSelector)
 
-    document
-      .querySelector(selectors.formSelector)
-      .addEventListener('submit', this.addFlickViaForm.bind(this))
-
+    this.listen(selectors)
     this.setupLists(selectors.listSelector)
     this.load()
   }
@@ -19,6 +16,42 @@ class App {
     const genres = ['comedy', 'drama', 'sci-fi']
     genres.map(genre => {
       this.lists[genre] = document.querySelector(`#${genre} ${listSelector}`)
+    })
+  }
+
+  listen(selectors) {
+    document
+      .querySelector(selectors.formSelector)
+      .addEventListener('submit', this.addFlickViaForm.bind(this))
+    document
+      .querySelector(selectors.searchSelector)
+      .addEventListener('keyup', this.search.bind(this))
+  }
+
+  search(ev) {
+    const q = ev.currentTarget.value.toLowerCase()
+    const prevMatches = Array.from(document.querySelectorAll('.flick-name strong'))
+    this.removeElements(prevMatches)
+
+    Array.from(document.querySelectorAll('.flick')).map(listItem => {
+      const nameField = listItem.querySelector('.flick-name')
+      if (nameField.textContent.toLowerCase().includes(q)) {
+        listItem.classList.remove('hide')
+        const pattern = new RegExp(q, 'gi')
+        nameField.innerHTML = nameField.innerHTML.replace(pattern, '<strong>$&</strong>')
+      } else {
+        listItem.classList.add('hide')
+      }
+    })
+  }
+
+  removeElements(elementArr) {
+    elementArr.map(el => {
+      const parent = el.parentNode
+      while(el.firstChild) {
+        parent.insertBefore(el.firstChild, el)
+      }
+      el.remove()
     })
   }
 
@@ -218,6 +251,7 @@ const app = new App({
   formSelector: '#flick-form',
   listSelector: '.flick-list',
   templateSelector: '.flick.template',
+  searchSelector: '.search input',
 })
 
 $(document).foundation()

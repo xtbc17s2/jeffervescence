@@ -29,7 +29,7 @@
               <select name="genre" required>
                 <option value="">-- Genre --</option>
                 <option value="comedy">Comedy</option>
-                <option value="comedy">Drama</option>
+                <option value="drama">Drama</option>
                 <option value="sci-fi">Sci-Fi</option>
               </select>
             </div>
@@ -50,8 +50,23 @@
     </div>
 
     <div class="row">
-      <div class="medium-8 medium-offset-2 column">
-        <ul class="no-bullet" id="flick-list"></ul>
+      <div class="medium-10 medium-offset-1 column">
+        <ul class="tabs" data-tabs id="genres">
+          <li class="tabs-title is-active"><a href="#comedy" aria-selected="true">Comedy</a></li>
+          <li class="tabs-title"><a href="#drama">Drama</a></li>
+          <li class="tabs-title"><a href="#sci-fi">Sci-Fi</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="genres">
+          <div class="tabs-panel is-active" id="comedy">
+            <ul class="flick-list" class="no-bullet"></ul>
+          </div>
+          <div class="tabs-panel" id="drama">
+            <ul class="flick-list" class="no-bullet"></ul>
+          </div>
+          <div class="tabs-panel" id="sci-fi">
+            <ul class="flick-list" class="no-bullet"></ul>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -91,6 +106,8 @@
       </span>
     </li>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
     <script src="app.js"></script>
   </body>
 </html>

@@ -1,27 +1,29 @@
+ul.flick-list {
+  margin: 0;
+}
+
 .flick.template {
   display: none;
 }
 
 .flick {
-  border: 1px solid #ddd;
-  clear: both;
+  border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
   padding: 0.75rem 1.25rem;
   transition: 0.25s;
 }
 
-.flick + .flick {
-  border-top: 0;
+.flick:last-child {
+  border-bottom: none;
 }
 
 .flick-name {
   flex-grow: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: calc(100% - 200px);
   margin-right: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .actions.button-group {
@@ -31,6 +33,11 @@
 
 .actions .button {
   padding: .65em 0.8em;
+  transition: 0.25s;
+}
+
+.actions .button:hover {
+  transform: scale(1.1);
 }
 
 .flick.fav {
@@ -43,4 +50,12 @@
   background-color: #ddd;
   color: #eee;
   cursor: not-allowed;
+}
+
+.tabs-panel {
+  padding: 0;
+}
+
+#genres {
+  position: relative;
 }

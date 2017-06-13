@@ -1,16 +1,25 @@
 class App {
   constructor(selectors) {
-    this.flicks = []
+    this.flicks = {}
     this.max = 0
-    this.list = document
-      .querySelector(selectors.listSelector)
+
     this.template = document
       .querySelector(selectors.templateSelector)
+
     document
       .querySelector(selectors.formSelector)
       .addEventListener('submit', this.addFlickViaForm.bind(this))
 
+    this.setupLists(selectors.listSelector)
     this.load()
+  }
+
+  setupLists(listSelector) {
+    this.lists = {}
+    const genres = ['comedy', 'drama', 'sci-fi']
+    genres.map(genre => {
+      this.lists[genre] = document.querySelector(`#${genre} ${listSelector}`)
+    })
   }
 
   load() {
@@ -30,13 +39,18 @@ class App {
 
   addFlick(flick) {
     const listItem = this.renderListItem(flick)
-    this.list
-      .insertBefore(listItem, this.list.firstChild)
+    this.lists[flick.genre]
+      .insertBefore(listItem, this.lists[flick.genre].firstChild)
     
     if (flick.id > this.max) {
       this.max = flick.id
     }
-    this.flicks.unshift(flick)
+
+    if (!this.flicks[flick.genre]) {
+      this.flicks[flick.genre] = []
+    }
+
+    this.flicks[flick.genre].unshift(flick)
     this.save()
   }
 
@@ -58,8 +72,9 @@ class App {
 
   save() {
     localStorage
-      .setItem('flicks', JSON.stringify(this.flicks))
-
+      .setItem('flicks', JSON.stringify(Object.keys(this.flicks).reduce((combined, genre) => {
+        return combined.concat(this.flicks[genre])
+      }, [])))
   }
 
   renderListItem(flick) {
@@ -83,7 +98,7 @@ class App {
 
     item
       .querySelector('button.remove')
-      .addEventListener('click', this.removeFlick.bind(this))
+      .addEventListener('click', this.removeFlick.bind(this, flick))
     item
       .querySelector('button.fav')
       .addEventListener('click', this.favFlick.bind(this, flick))
@@ -100,14 +115,15 @@ class App {
     return item
   }
 
-  removeFlick(ev) {
+  removeFlick(flick, ev) {
     const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flick.genre]
 
     // Find the flick in the array, and remove it
-    for (let i = 0; i < this.flicks.length; i++) {
-      const currentId = this.flicks[i].id.toString()
+    for (let i = 0; i < flickArr.length; i++) {
+      const currentId = flickArr[i].id.toString()
       if (listItem.dataset.id === currentId) {
-        this.flicks.splice(i, 1)
+        flickArr.splice(i, 1)
         break
       }
     }
@@ -117,7 +133,6 @@ class App {
   }
 
   favFlick(flick, ev) {
-    console.log(ev.currentTarget)
     const listItem = ev.target.closest('.flick')
     flick.fav = !flick.fav
 
@@ -132,34 +147,36 @@ class App {
 
   moveUp(flick, ev) {
     const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flick.genre]
 
-    const index = this.flicks.findIndex((currentFlick, i) => {
+    const index = flickArr.findIndex((currentFlick, i) => {
       return currentFlick.id === flick.id
     })
 
     if (index > 0) {
-      this.list.insertBefore(listItem, listItem.previousElementSibling)
+      this.lists[flick.genre].insertBefore(listItem, listItem.previousElementSibling)
 
-      const previousFlick = this.flicks[index - 1]
-      this.flicks[index - 1] = flick
-      this.flicks[index] = previousFlick
+      const previousFlick = flickArr[index - 1]
+      flickArr[index - 1] = flick
+      flickArr[index] = previousFlick
       this.save()
     }
   }
 
   moveDown(flick, ev) {
     const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flick.genre]
 
-    const index = this.flicks.findIndex((currentFlick, i) => {
+    const index = flickArr.findIndex((currentFlick, i) => {
       return currentFlick.id === flick.id
     })
 
-    if (index < this.flicks.length - 1) {
-      this.list.insertBefore(listItem.nextElementSibling, listItem)
+    if (index < flickArr.length - 1) {
+      this.lists[flick.genre].insertBefore(listItem.nextElementSibling, listItem)
       
-      const nextFlick = this.flicks[index + 1]
-      this.flicks[index + 1] = flick
-      this.flicks[index] =  nextFlick
+      const nextFlick = flickArr[index + 1]
+      flickArr[index + 1] = flick
+      flickArr[index] =  nextFlick
       this.save()
     }
   }
@@ -199,6 +216,8 @@ class App {
 
 const app = new App({
   formSelector: '#flick-form',
-  listSelector: '#flick-list',
+  listSelector: '.flick-list',
   templateSelector: '.flick.template',
 })
+
+$(document).foundation()
